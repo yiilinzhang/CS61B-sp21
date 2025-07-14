@@ -111,8 +111,7 @@ public class Model extends Observable {
         changed = false;
         board.setViewingPerspective(side);
         for (int col=0 ; col<board.size(); col ++){
-            boolean rowChanged = colIterator(col);
-            if (rowChanged == true){
+            if (colIterator(col) == true){
                 changed = true;
             }
         }
