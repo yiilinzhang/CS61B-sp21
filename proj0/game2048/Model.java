@@ -108,15 +108,13 @@ public class Model extends Observable {
      * */
     public boolean tilt(Side side) {
         boolean changed;
-        changed = true;
-
-        // TODO: Modify this.board (and perhaps this.score) to account
-        // for the tilt to the Side SIDE. If the board changed, set the
-        // changed local variable to true.
-        /**tilt the board here, if side==north, there is no need to tilt*/
+        changed = false;
         board.setViewingPerspective(side);
         for (int col=0 ; col<board.size(); col ++){
-            colIterator(col);
+            boolean rowChanged = colIterator(col);
+            if (rowChanged == true){
+                changed = true;
+            }
         }
         checkGameOver();
         if (changed) {
@@ -127,9 +125,10 @@ public class Model extends Observable {
 
     }
 /** iterates over every column */
-    public void colIterator(int colNo){
+    public boolean colIterator(int colNo){
         int lastTileRow = board.size();
         int lastTileValue = 0;
+        boolean changedHelper = false;
         /** iterating over every row from top to bottom */
         for (int row = board.size()-1; row >=0 ; row --){
             /** set Tile t to current tile*/
@@ -139,13 +138,18 @@ public class Model extends Observable {
                     board.move(colNo, lastTileRow, t);
                     score += 2*lastTileValue;
                     lastTileValue=0;
+                    changedHelper = true;
                 }else{
                     lastTileValue = t.value();
                     lastTileRow--;
                     board.move(colNo, lastTileRow,t);
+                    if (row != lastTileRow){
+                        changedHelper = true;
+                    }
                 }
             }
         }
+        return changedHelper;
     }
 
     /** Checks if the game is over and sets the gameOver variable
