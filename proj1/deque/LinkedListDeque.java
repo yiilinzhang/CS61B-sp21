@@ -1,0 +1,100 @@
+package deque;
+
+public class LinkedListDeque<T> {
+        private class Node{
+        T item ;
+        Node next ;
+        Node prev ;
+        private Node(T i, Node p, Node n){
+            item = i;
+            next = n;
+            prev = p;
+        }
+    }
+
+    private int size;
+    private Node sentinel;
+
+    //Initialises the first Linkedlist
+    public LinkedListDeque(){
+        size=0;
+        sentinel= new Node(null, null, null);
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
+    }
+
+    //Adds an item of type T to the front of the deque. You can assume that item is never null.
+    public void addFirst(T item){
+        size +=1;
+        Node newNode = new Node(item, sentinel, sentinel.next);
+        sentinel.next.prev= newNode;
+        sentinel.next = newNode;
+    }
+
+    //Adds an item of type T to the back of the deque. You can assume that item is never null.
+    public void addLast(T item){
+        size+=1;
+        Node newNode = new Node(item, sentinel.prev, sentinel);
+        sentinel.prev.next = newNode;
+        sentinel.prev = newNode;
+    }
+
+    //Returns true if deque is empty, false otherwise.
+    public boolean isEmpty(){
+        if(size==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Returns the number of items in the deque.
+    public int size(){return size;}
+
+    /*Prints the items in the deque from first to last, separated by a space.
+    Once all the items have been printed, print out a new line.
+     */
+    public void printDeque(){
+        Node tempPointer= sentinel;
+        String toPrint = "";
+        for (int i = 0; i<size; i++){
+            tempPointer= tempPointer.next;
+            toPrint += tempPointer.item + " ";
+        }
+        System.out.println(toPrint);
+    }
+
+    //Removes and returns the item at the front of the deque. If no such item exists, returns null.
+    public T removeFirst(){
+        if(size ==0){
+            return null;
+        }
+        size -=1;
+        Node firstItem = sentinel.next;
+        sentinel.next = firstItem.next;
+        firstItem.next.prev=sentinel;
+        return firstItem.item;
+    };
+
+    //Removes and returns the item at the back of the deque. If no such item exists, returns null.
+    public T removeLast(){
+        if(size ==0){
+            return null;
+        }
+        size -=1;
+        Node lastItem = sentinel.prev;
+        sentinel.prev=lastItem.prev;
+        lastItem.prev.next=sentinel;
+        return lastItem.item;
+    }
+
+    //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
+    public T get(int index){
+        Node tempPointer = sentinel;
+        for(int i = 0 ; i<=index; i++){
+            tempPointer = tempPointer.next;
+        }
+        return tempPointer.item;
+
+    }
+}
