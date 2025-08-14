@@ -43,6 +43,20 @@ public class ArrayDequeTest {
     }
 
     //Test if the array accepts all types
+    @Test
+    public void multipleParamTest() {
+        ArrayDeque<String>  lld1 = new ArrayDeque<String>();
+        ArrayDeque<Double>  lld2 = new ArrayDeque<Double>();
+        ArrayDeque<Boolean> lld3 = new ArrayDeque<Boolean>();
+
+        lld1.addFirst("string");
+        lld2.addFirst(3.14159);
+        lld3.addFirst(true);
+
+        String s = lld1.removeFirst();
+        double d = lld2.removeFirst();
+        boolean b = lld3.removeFirst();
+    }
 
 
 

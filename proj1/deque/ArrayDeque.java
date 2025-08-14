@@ -1,8 +1,8 @@
 package deque;
 
-public class ArrayDeque {
+public class ArrayDeque<T> {
     int arraySize;
-    int[] array;
+    T[] array;
     int nextFirst;
     int nextLast;
     int size;
@@ -10,7 +10,7 @@ public class ArrayDeque {
     ArrayDeque(){
         arraySize=8;
         size=0;
-        array = new int[8];
+        array =(T[]) new Object[8];
         nextFirst = 3;
         nextLast=4;
     }
@@ -24,9 +24,9 @@ public class ArrayDeque {
     * 6.size()*/
 
     //removes and returns the first item in the list
-    public int removeFirst(){
+    public T removeFirst(){
         int removeIndex = nextFirst+1;
-        int removedItem = 0;
+        T removedItem = null;
         if (nextFirst== arraySize-1){
             removeIndex = 0;
         }
@@ -40,7 +40,7 @@ public class ArrayDeque {
 
 
     //returns the x's item of the array
-    public int get(int index){
+    public T get(int index){
         int arrayIndex = nextFirst;
         for(int i = 0; i<=index; i++){
             if(arrayIndex == arraySize-1){
@@ -53,9 +53,9 @@ public class ArrayDeque {
     }
 
     //removes and returns the last item in the list
-    public int removeLast(){
+    public T removeLast(){
         int removeIndex = nextLast-1;
-        int removedItem = 0;
+        T removedItem = null;
         if (nextLast==0){
             removeIndex = arraySize-1;
         }
@@ -90,10 +90,10 @@ public class ArrayDeque {
     }
 
     //adds the parameter to the front of the array
-    public void addFirst(int T){
+    public void addFirst(T x){
         checkIncSize();
         size+=1;
-        array[nextFirst]=T;
+        array[nextFirst]=x;
         if (nextFirst==0){
             nextFirst=arraySize-1;
         }else{
@@ -101,10 +101,10 @@ public class ArrayDeque {
     }
 
     //adds the paramenter to the back of the array
-    public void addLast(int T){
+    public void addLast(T x){
         checkIncSize();
         size+=1;
-        array[nextLast] = T;
+        array[nextLast] = x;
         if (nextLast == arraySize-1){
             nextLast=0;
         }else{
@@ -121,12 +121,12 @@ public class ArrayDeque {
         }
 
         if (size< arraySize / 4){
-            int[] newDecArray = new int[arraySize / 4];
+            T[] newDecArray = (T[]) new Object[arraySize / 4];
             resizeHelper(array, newDecArray, copyIndex , size);
             array= newDecArray;
             arraySize= arraySize / 4;
         }else{
-            int[] newIncArray = new int[arraySize*2];
+            T[] newIncArray = (T[]) new Object[arraySize*2];
             resizeHelper(array, newIncArray, copyIndex, size);
             array = newIncArray;
             arraySize = arraySize*2;
@@ -138,7 +138,7 @@ public class ArrayDeque {
 
     //helper function for resize - custom copy array func
     //default start copying into destination array at index 0
-    private void resizeHelper(int[] source, int[] destination, int startIndexSource, int length){
+    private void resizeHelper(T[] source, T[] destination, int startIndexSource, int length){
         for(int i = 0 ; i <length; i++){
             if (startIndexSource == arraySize){
                 startIndexSource=0;
