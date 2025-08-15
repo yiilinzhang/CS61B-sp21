@@ -7,12 +7,12 @@ public class ArrayDeque<T> {
     int nextLast;
     int size;
 
-    public ArrayDeque(){
-        arraySize=8;
-        size=0;
-        array =(T[]) new Object[8];
+    public ArrayDeque () {
+        arraySize = 8;
+        size = 0;
+        array = (T[]) new Object[8];
         nextFirst = 3;
-        nextLast=4;
+        nextLast = 4;
     }
 
     /*Methods implemented
@@ -24,25 +24,24 @@ public class ArrayDeque<T> {
     * 6.size()*/
 
     //removes and returns the first item in the list
-    public T removeFirst(){
-        int removeIndex = nextFirst+1;
+    public T removeFirst () {
+        int removeIndex = nextFirst + 1;
         T removedItem = null;
-        if (nextFirst== arraySize-1){
+        if (nextFirst == arraySize - 1) {
             removeIndex = 0;
         }
-        if (size!=0){
-            size --;
+        if (size != 0) {
+            size -- ;
             removedItem = array[removeIndex];
             nextFirst = removeIndex;
         }
         return removedItem;
     }
 
-
     //returns the x's item of the array
-    public T get(int index){
+    public T get (int index) {
         int arrayIndex = nextFirst;
-        for(int i = 0; i<=index; i++){
+        for(int i = 0; i <= index; i++){
             if(arrayIndex == arraySize-1){
                 arrayIndex=0;
             }else{
@@ -69,7 +68,7 @@ public class ArrayDeque<T> {
 
 
     //return true is the array is empty and false otherwise
-    public boolean isEmpty(){
+    public boolean isEmpty () {
         if (size == 0){
             return true;
         }else{
@@ -84,7 +83,7 @@ public class ArrayDeque<T> {
 
     //helper function to check if a resize is necessary when adding elements
     private void checkIncSize(){
-        if (arraySize==size){
+        if (arraySize == size){
             resize();
         }
     }
@@ -92,23 +91,23 @@ public class ArrayDeque<T> {
     //adds the parameter to the front of the array
     public void addFirst(T x){
         checkIncSize();
-        size+=1;
-        array[nextFirst]=x;
-        if (nextFirst==0){
-            nextFirst=arraySize-1;
-        }else{
-        nextFirst-=1;}
+        size += 1;
+        array[nextFirst] = x;
+        if (nextFirst == 0){
+            nextFirst = arraySize - 1;
+        } else {
+        nextFirst -= 1;}
     }
 
     //adds the paramenter to the back of the array
     public void addLast(T x){
         checkIncSize();
-        size+=1;
+        size += 1;
         array[nextLast] = x;
         if (nextLast == arraySize-1){
-            nextLast=0;
+            nextLast = 0;
         }else{
-        nextLast+=1;}
+        nextLast += 1;}
     }
 
     //resizes the array up or down
