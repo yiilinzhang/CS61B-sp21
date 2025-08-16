@@ -1,7 +1,8 @@
 package deque;
 
-public class LinkedListDeque<T> {
-        private class Node{
+public class LinkedListDeque<T> implements Deque<T>{
+
+    private class Node{
         T item ;
         Node next ;
         Node prev ;
@@ -40,15 +41,9 @@ public class LinkedListDeque<T> {
     }
 
     //Returns true if deque is empty, false otherwise.
-    public boolean isEmpty(){
-        if(size==0){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     //Returns the number of items in the deque.
+    @Override
     public int size(){return size;}
 
     /*Prints the items in the deque from first to last, separated by a space.

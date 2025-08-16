@@ -1,6 +1,6 @@
 package deque;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T>{
     int arraySize;
     T[] array;
     int nextFirst;
@@ -68,15 +68,9 @@ public class ArrayDeque<T> {
 
 
     //return true is the array is empty and false otherwise
-    public boolean isEmpty () {
-        if (size == 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     //returns the number of elements in the array
+    @Override
     public int size(){
         return size;
     }
