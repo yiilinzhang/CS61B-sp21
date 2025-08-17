@@ -1,12 +1,12 @@
 package deque;
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
-    int arraySize;
-    T[] array;
-    int nextFirst;
-    int nextLast;
-    int size;
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
+    private int arraySize;
+    private T[] array;
+    private int nextFirst;
+    private int nextLast;
+    private int size;
 
     public ArrayDeque() {
         arraySize = 8;
@@ -84,7 +84,8 @@ public class ArrayDeque<T> implements Deque<T> {
         if (nextFirst == 0) {
             nextFirst = arraySize - 1;
         } else {
-        nextFirst -= 1;}
+            nextFirst -= 1;
+        }
     }
 
     //adds the parameter to the back of the array
@@ -96,7 +97,8 @@ public class ArrayDeque<T> implements Deque<T> {
         if (nextLast == arraySize - 1) {
             nextLast = 0;
         } else {
-        nextLast += 1;}
+            nextLast += 1;
+        }
     }
 
     //resizes the array up or down
@@ -121,12 +123,11 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         nextFirst = arraySize - 1;
         nextLast = size;
-
     }
 
     //helper function for resize - custom copy array func
     private void resizeHelper(T[] source, T[] destination, int startIndexSource, int length) {
-        for(int i = 0 ;i < length; i++){
+        for(int i = 0; i < length; i++) {
             if (startIndexSource == arraySize) {
                 startIndexSource = 0;
             }
@@ -138,7 +139,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public void printDeque() {
         String toPrint = "";
-        for (int i = 0; i< size; i++){
+        for (int i = 0; i < size; i++) {
             toPrint += get(i) + " ";
         }
         System.out.println(toPrint);
@@ -169,7 +170,7 @@ public class ArrayDeque<T> implements Deque<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         int wizPos;
 
-        public ArrayDequeIterator() {
+        ArrayDequeIterator() {
             wizPos = 0;
         }
 
@@ -186,7 +187,8 @@ public class ArrayDeque<T> implements Deque<T> {
             T item = get(wizPos);
             wizPos += 1;
             return item;
-        }}
+        }
+    }
 
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();

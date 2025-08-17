@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T> {
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     private class Node {
         T item;
@@ -50,7 +50,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     //Returns the number of items in the deque.
     @Override
-    public int size() {return size;}
+    public int size() {
+        return size;
+    }
 
     /*Prints the items in the deque from first to last, separated by a space.
     Once all the items have been printed, print out a new line.
@@ -69,7 +71,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     //Removes and returns the item at the front of the deque. If no such item exists, returns null.
     @Override
     public T removeFirst() {
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
         size -= 1;
@@ -92,11 +94,13 @@ public class LinkedListDeque<T> implements Deque<T> {
         return lastItem.item;
     }
 
-    //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
+    /*Gets the item at the given index, where 0 is the front,
+    * 1 is the next item, and so forth. If no such item exists, returns null.
+    * Must not alter the deque!*/
     @Override
     public T get(int index) {
         Node tempPointer = sentinel;
-        for (int i = 0 ; i <= index; i++) {
+        for (int i = 0; i <= index; i++) {
             tempPointer = tempPointer.next;
         }
         return tempPointer.item;
@@ -117,7 +121,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     private class ListDequeIterator implements Iterator<T> {
         int wizPos;
 
-        public ListDequeIterator() {
+        ListDequeIterator() {
             wizPos = 0;
         }
 
@@ -134,7 +138,8 @@ public class LinkedListDeque<T> implements Deque<T> {
             T item = get(wizPos);
             wizPos += 1;
             return item;
-        }}
+        }
+    }
 
     public Iterator<T> iterator() {
         return new ListDequeIterator();

@@ -4,18 +4,18 @@ import java.util.Iterator;
 
 public interface Deque<T> {
 
-    public int size();
-    public void addFirst(T item);
-    public void addLast(T item);
-    public void printDeque();
-    public T removeFirst();
-    public T removeLast();
-    public T get(int index);
-    public Iterator<T> iterator();
-    default public boolean isEmpty(){
-        if(size() ==0){
+    int size();
+    void addFirst(T item);
+    void addLast(T item);
+    void printDeque();
+    T removeFirst();
+    T removeLast();
+    T get(int index);
+    Iterator<T> iterator();
+    default boolean isEmpty() {
+        if (size() == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
