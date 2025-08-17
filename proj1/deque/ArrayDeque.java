@@ -127,7 +127,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     //helper function for resize - custom copy array func
     private void resizeHelper(T[] source, T[] destination, int startIndexSource, int length) {
-        for(int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             if (startIndexSource == arraySize) {
                 startIndexSource = 0;
             }
