@@ -1,4 +1,5 @@
 package deque;
+import java.util.Iterator;
 
 public class ArrayDeque<T> implements Deque<T>{
     int arraySize;
@@ -15,15 +16,7 @@ public class ArrayDeque<T> implements Deque<T>{
         nextLast = 4;
     }
 
-    /*Methods implemented
-    * 1.removeFirst()
-    * 2.removeLast()
-    * 3.get(index)
-    * 4.addLast()
-    * 5.addFirst()
-    * 6.size()*/
-
-    //removes and returns the first item in the list
+    @Override
     public T removeFirst () {
         int removeIndex = nextFirst + 1;
         T removedItem = null;
@@ -39,6 +32,8 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     //returns the x's item of the array
+
+    @Override
     public T get (int index) {
         int arrayIndex = nextFirst;
         for(int i = 0; i <= index; i++){
@@ -52,6 +47,7 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     //removes and returns the last item in the list
+    @Override
     public T removeLast(){
         int removeIndex = nextLast-1;
         T removedItem = null;
@@ -65,9 +61,6 @@ public class ArrayDeque<T> implements Deque<T>{
         }
         return removedItem;
     }
-
-
-    //return true is the array is empty and false otherwise
 
     //returns the number of elements in the array
     @Override
@@ -83,6 +76,7 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     //adds the parameter to the front of the array
+    @Override
     public void addFirst(T x){
         checkIncSize();
         size += 1;
@@ -93,7 +87,8 @@ public class ArrayDeque<T> implements Deque<T>{
         nextFirst -= 1;}
     }
 
-    //adds the paramenter to the back of the array
+    //adds the parameter to the back of the array
+    @Override
     public void addLast(T x){
         checkIncSize();
         size += 1;
@@ -130,7 +125,6 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     //helper function for resize - custom copy array func
-    //default start copying into destination array at index 0
     private void resizeHelper(T[] source, T[] destination, int startIndexSource, int length){
         for(int i = 0 ; i <length; i++){
             if (startIndexSource == arraySize){
@@ -139,5 +133,58 @@ public class ArrayDeque<T> implements Deque<T>{
             destination[i] = source[startIndexSource];
             startIndexSource ++;
         }
+    }
+
+    @Override
+    public void printDeque(){
+        String toPrint = "";
+        for (int i = 0; i<size; i++){
+            toPrint += get(i) + " ";
+        }
+        System.out.println(toPrint);
+    }
+
+
+
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o){return true;}
+        if (o instanceof LinkedListDeque linked){
+            if (size != linked.size()) {return false;}
+            for (int x = 0 ; x < size ; x++){
+                if (get(x) != linked.get(x)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private class ArrayDequeIterator implements Iterator<T>{
+        int wizPos;
+
+        public ArrayDequeIterator(){
+            wizPos = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (wizPos < size){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            T item = get(wizPos);
+            wizPos += 1;
+            return item;
+        }}
+
+    @Override
+    public Iterator<T> iterator(){
+        return new ArrayDequeIterator();
     }
 }

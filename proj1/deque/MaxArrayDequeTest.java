@@ -33,8 +33,8 @@ public class MaxArrayDequeTest {
         test.addFirst(1);
         test.addFirst(2);
         test.addLast(4);
-        System.out.println(test.Max());
-        System.out.println(test.Max(new comparator2()));
+        System.out.println(test.max());
+        System.out.println(test.max(new comparator2()));
 
     }
 
@@ -45,6 +45,6 @@ public void constructorTestStr(){
     test.addFirst("hello");
     test.addFirst("medium hello");
     test.addLast("longgggg hello");
-    System.out.println(test.Max());
+    System.out.println(test.max());
 }
 }

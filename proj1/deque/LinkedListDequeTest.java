@@ -45,6 +45,8 @@ public class LinkedListDequeTest {
 		// should not be empty
 		assertFalse("lld1 should contain 1 item", lld1.isEmpty());
 
+        System.out.println(lld1.getRecursive(0));
+
 		lld1.removeFirst();
 		// should be empty
 		assertTrue("lld1 should be empty after removal", lld1.isEmpty());
@@ -115,5 +117,18 @@ public class LinkedListDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
+    }
+
+    @Test
+    public void testEquals () {
+        LinkedListDeque<Integer> test1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> test2 = new LinkedListDeque<>();
+        test1.addFirst(1);
+        test1.addFirst(2);
+        test2.addFirst(1);
+        test2.addFirst(2);
+        assertEquals("Test 1 and test 2 should be equal.", true, test1.equals(test2));
+        assertEquals("The same object should be equal.", true, test1.equals(test1));
+
     }
 }
