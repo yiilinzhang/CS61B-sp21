@@ -188,7 +188,6 @@ public class ArrayDeque<T> implements Deque<T> {
             return item;
         }}
 
-    @Override
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();
     }
