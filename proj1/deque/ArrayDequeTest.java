@@ -24,7 +24,7 @@ public class ArrayDequeTest {
             } else if (actionNo == 3) {
                 test.removeLast();
             }else{
-                test.get(test.size / 2);
+                test.get(test.size() / 2);
             }
         }
 

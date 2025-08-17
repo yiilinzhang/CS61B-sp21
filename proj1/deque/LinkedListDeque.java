@@ -108,14 +108,14 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public T getRecursive(int index) {
-        T returnItem = null;
         if (index == 0) {
-            returnItem = getHelper.next.item;
+            T returnItem = getHelper.next.item;
             getHelper = sentinel;
+            return returnItem;
         } else {
             getHelper = getHelper.next;
+            return getRecursive(index-1);
         }
-        return returnItem;
     }
 
     private class ListDequeIterator implements Iterator<T> {

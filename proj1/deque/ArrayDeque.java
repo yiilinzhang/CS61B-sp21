@@ -110,11 +110,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             copyIndex = nextFirst + 1;
         }
 
-        if (size < arraySize / 4) {
-            T[] newDecArray = (T[]) new Object[arraySize / 4];
+        if (size < arraySize / 2) {
+            T[] newDecArray = (T[]) new Object[arraySize / 2];
             resizeHelper(array, newDecArray, copyIndex, size);
             array = newDecArray;
-            arraySize = arraySize / 4;
+            arraySize = arraySize / 2;
         } else {
             T[] newIncArray = (T[]) new Object[arraySize * 2];
             resizeHelper(array, newIncArray, copyIndex, size);
