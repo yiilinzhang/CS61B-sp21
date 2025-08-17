@@ -12,8 +12,6 @@ public interface Deque<T> {
     public T removeLast();
     public T get(int index);
     public Iterator<T> iterator();
-    public boolean equals(Object o);
-
     default public boolean isEmpty(){
         if(size() ==0){
             return true;
