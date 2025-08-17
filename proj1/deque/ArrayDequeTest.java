@@ -109,6 +109,18 @@ public class ArrayDequeTest {
 
         assertEquals(errorMsg, 0, size);
     }
+
+    @Test
+    public void equalityTest() {
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+        lld1.addFirst(1);
+        lld1.addFirst(2);
+        lld2.addFirst(1);
+        lld2.addFirst(2);
+        assertEquals("Linked and Array list with the same elements should be equal", true, lld1.equals(lld2));
+    }
+
 }
 
 

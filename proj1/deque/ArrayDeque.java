@@ -28,6 +28,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             removedItem = array[removeIndex];
             nextFirst = removeIndex;
         }
+        if (size < arraySize / 4) {
+            resize();
+        }
         return removedItem;
     }
 
@@ -58,6 +61,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             size--;
             removedItem = array[removeIndex];
             nextLast = removeIndex;
+        }
+        if (size < arraySize / 4) {
+            resize();
         }
         return removedItem;
     }
@@ -110,11 +116,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             copyIndex = nextFirst + 1;
         }
 
-        if (size < arraySize / 2) {
+        if (size < arraySize / 4) {
             T[] newDecArray = (T[]) new Object[arraySize / 2];
             resizeHelper(array, newDecArray, copyIndex, size);
             array = newDecArray;
-            arraySize = arraySize / 2;
+            arraySize = arraySize / 4;
         } else {
             T[] newIncArray = (T[]) new Object[arraySize * 2];
             resizeHelper(array, newIncArray, copyIndex, size);
@@ -152,8 +158,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        if (o instanceof LinkedListDeque) {
-            LinkedListDeque<?> linked = (LinkedListDeque<?>) o;
+        if (o instanceof Deque) {
+            Deque<T> linked = (Deque<T>) o;
             if (size != linked.size()) {
                 return false;
             }
