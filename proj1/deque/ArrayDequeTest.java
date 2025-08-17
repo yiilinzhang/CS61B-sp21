@@ -12,23 +12,35 @@ public class ArrayDequeTest {
     @Test
     public void addRemoveTest(){
         ArrayDeque<Integer> test  = new ArrayDeque<>();
+        LinkedListDeque<Integer> ref = new LinkedListDeque<>();
+        Object testVar;
+        Object refVar;
         int N = 5000;
         for(int i = 0; i<N; i++){
             int actionNo= StdRandom.uniform(0, 5);
-            if(actionNo==0){
+            if(actionNo == 0){
                 test.addFirst(i);
+                ref.addFirst(i);
+                assertEquals("addFirst fail", true, ref.equals(test));
             }else if (actionNo == 1){
                 test.addLast(i);
+                ref.addLast(i);
+                assertEquals("add last fail",true, ref.equals(test));
             }else if (actionNo == 2){
-                test.removeFirst();
+                testVar = test.removeFirst();
+                refVar = ref.removeFirst();
+                assertEquals("removefirst fail",true, ref.equals(test));
             } else if (actionNo == 3) {
-                test.removeLast();
+                testVar = test.removeLast();
+                refVar = ref.removeLast();
+                assertEquals("remove last fail",true, ref.equals(test));
             }else{
-                test.get(test.size() / 2);
-            }
+                testVar = test.get(test.size() / 2);
+                refVar = ref.get(ref.size() / 2);
+                assertEquals("get fail",true, ref.equals(test));
         }
 
-    }
+    }}
 
     //checks if isEmpty returns true when array is empty and false otherwise
     @Test

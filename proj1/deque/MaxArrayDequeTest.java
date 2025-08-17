@@ -6,29 +6,29 @@ import java.util.Comparator;
 
 public class MaxArrayDequeTest {
 
-    public class comparator1 implements Comparator<Integer>{
+    public class comparator1 implements Comparator<Integer> {
         @Override
         public int compare(Integer o1, Integer o2) {
-            return o1-o2;
+            return o1 - o2;
         }
     }
 
-    public class comparator2 implements Comparator<Integer>{
+    public class comparator2 implements Comparator<Integer> {
         @Override
         public int compare(Integer o1, Integer o2) {
-            return o2-o1;
+            return o2 - o1;
         }
     }
 
-    public class comparator3 implements Comparator<String>{
+    public class comparator3 implements Comparator<String> {
         @Override
         public int compare(String o1, String o2) {
-            return o1.length()- o2.length();
+            return o1.length() - o2.length();
         }
     }
 
     @Test
-    public void constructorTestInt(){
+    public void constructorTestInt() {
         MaxArrayDeque<Integer> test = new MaxArrayDeque<>(new comparator1());
         test.addFirst(1);
         test.addFirst(2);
@@ -39,12 +39,13 @@ public class MaxArrayDequeTest {
     }
 
 
-@Test
-public void constructorTestStr(){
-    MaxArrayDeque<String> test = new MaxArrayDeque<>(new comparator3());
-    test.addFirst("hello");
-    test.addFirst("medium hello");
-    test.addLast("longgggg hello");
-    System.out.println(test.max());
-}
+    @Test
+    public void constructorTestStr() {
+        MaxArrayDeque<String> test = new MaxArrayDeque<>(new comparator3());
+        test.addFirst("hello");
+        test.addFirst("medium hello");
+        test.addLast("longgggg hello");
+        System.out.println(test.max());
+    }
+
 }

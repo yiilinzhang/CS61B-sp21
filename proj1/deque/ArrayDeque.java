@@ -20,12 +20,13 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     public T removeFirst() {
         int removeIndex = nextFirst + 1;
         T removedItem = null;
-        if (nextFirst == arraySize - 1) {
+        if (nextFirst == arraySize-1) {
             removeIndex = 0;
         }
         if (size != 0) {
             size--;
             removedItem = array[removeIndex];
+            array[removeIndex] = null;
             nextFirst = removeIndex;
         }
         if (size < arraySize / 4) {
@@ -60,6 +61,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size != 0) {
             size--;
             removedItem = array[removeIndex];
+            array[removeIndex] = null;
             nextLast = removeIndex;
         }
         if (size < arraySize / 4) {
@@ -110,14 +112,14 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     //resizes the array up or down
     private void resize() {
         int copyIndex;
-        if (nextFirst == size - 1) {
+        if (nextFirst == arraySize - 1) {
             copyIndex = 0;
         } else {
             copyIndex = nextFirst + 1;
         }
 
         if (size < arraySize / 4) {
-            T[] newDecArray = (T[]) new Object[arraySize / 2];
+            T[] newDecArray = (T[]) new Object[arraySize / 4];
             resizeHelper(array, newDecArray, copyIndex, size);
             array = newDecArray;
             arraySize = arraySize / 4;
@@ -150,9 +152,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         System.out.println(toPrint);
     }
-
-
-
 
     public boolean equals(Object o) {
         if (this == o) {
