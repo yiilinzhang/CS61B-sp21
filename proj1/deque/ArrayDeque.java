@@ -20,7 +20,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     public T removeFirst() {
         int removeIndex = nextFirst + 1;
         T removedItem = null;
-        if (nextFirst == arraySize-1) {
+        if (nextFirst == arraySize - 1) {
             removeIndex = 0;
         }
         if (size != 0) {
