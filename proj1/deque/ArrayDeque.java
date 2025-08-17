@@ -147,18 +147,23 @@ public class ArrayDeque<T> implements Deque<T>{
 
 
 
-    @Override
-    public boolean equals(Object o){
-        if (this == o){return true;}
-        if (o instanceof LinkedListDeque linked){
-            if (size != linked.size()) {return false;}
-            for (int x = 0 ; x < size ; x++){
-                if (get(x) != linked.get(x)){
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof LinkedListDeque) {
+            LinkedListDeque<?> linked = (LinkedListDeque<?>) o;
+            if (size != linked.size()) {
+                return false;
+            }
+            for (int i = 0; i < size; i++) {
+                if (!get(i).equals(linked.get(i))) {
                     return false;
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     private class ArrayDequeIterator implements Iterator<T>{
